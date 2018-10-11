@@ -71,8 +71,9 @@ export default {
 </script>
 
 <style scoped>
-.bannerCom{width: 600px;height: 300px;float: left;}
-.bannerCom .left{width: 480px;height: 300px;float: left; }
+.bannerCom{width: 800px;height: 300px;float: left;}
+.bannerCom .left{width: 680px;height: 300px;float: left; }
+.bannerCom .left img{width: 680px;height: 300px;}
 .bannerCom .item{position: relative;}
 .bannerCom .item li{position: absolute;}
 .bannerCom .right{float: right;width: 100px;margin-left: 20px;position: relative;}

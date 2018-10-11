@@ -16,5 +16,7 @@ ul,li{list-style:none;}
 img{border: 0; vertical-align: top;}
 a{color: #333; text-decoration: none;}
 body{font-family: 'microsoft yahei';background: #f5f5f5;}
-#app{width: 1000px;margin: 0 auto; }
+#app{width: 1200px;margin: 0 auto; }
+.clearfix:after {content: ''; display: block; clear: both; }
+.clearfix {zoom: 1; }
  </style>

@@ -10,7 +10,8 @@
     </ul>
     <ul class="item">
       <router-link tag="li" to="/" active-class = "active" exact>Home</router-link> 
-      <router-link tag="li" to="/article" active-class = "active" exact>全部文章</router-link>
+      <router-link tag="li" to='/MyArticle' active-class = "active" exact>全部文章</router-link>
+      <router-link tag="li" :to="'/MyArticle/id='+memberInfo.id" active-class = "active" v-show="isShow" exact>我的文章</router-link>
     </ul>
   </div>
 </template>
@@ -21,10 +22,25 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      show:'',
+      isShow:'',
+      memberInfo:'',
+
       msg: ''
     }
   },
   mounted(){
+    this.$store.dispatch('loginmess').then(()=>{
+      if(this.$store.getters.getToken){  // 通过vuex state获取当前的token是否存在  
+        this.show = false;
+        this.isShow = true;
+        this.memberInfo = this.$store.getters.getMemberInfo;
+      }else{
+        this.show = true;
+        this.isShow = false;
+
+      }
+    })
   },
   methods:{
   }
@@ -32,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.header{height: 140px;background: #FFFFCD url('../../assets/images/logo.png') 0 0 no-repeat;background-size: 100% 100%;padding-left: 370px;}
+.header{height: 140px;background: #FFFFCD url('../../assets/images/logo.png') 0 0 no-repeat;background-size: 100% 100%;padding-left: 410px;}
 .header li.Message{padding-top: 40px;float: left;}
 .header li.Message p{line-height: 30px;height: 30px;color: #646060;}
 .header li.Message p.p-2{padding-left: 30px;}

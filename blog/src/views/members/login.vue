@@ -12,7 +12,7 @@
               <input type="password"  class='password' placeholder='请输入密码'  v-model='data.pass'  @keyup.enter='login()'>
             </div>
             <div>
-              <span class="login-btn" @click='login()' v-loading.fullscreen.lock="fullscreenLoading">登录</span>
+              <span class="login-btn" @click='login()'>登录</span>
               <p class="already">还没有理账号？<a href="/register" >请立即注册</a></p>
             </div>
       </form>  
@@ -34,7 +34,7 @@ export default {
           name:'',
           pass:''
         },
-        fullscreenLoading:false,
+        
         timer:''
     }
   },
@@ -59,7 +59,7 @@ export default {
         });
       axios.get('/api/login',{params :data}).then(
         (res) => {
-           loading.close();
+          loading.close();
           if(res.data.code == 200){
             loading.close();
             Message({
@@ -69,7 +69,7 @@ export default {
               center:true,
               customClass:'message'
             });
-            this.$store.commit('updataMemberInfo',res.data.result);
+            this.$store.commit('updataMemberInfo',res.data.result[0]);
             this.timer = setTimeout(() => {
               this.$router.push({path: '/'});
             },2000)
@@ -93,7 +93,6 @@ export default {
               center:true,
               customClass:'message'
             });
-            console.log(error);
           }
         )
       }

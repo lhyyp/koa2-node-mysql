@@ -26,18 +26,9 @@ export default {
       myBanner
   },
   mounted(){
-    // this.getApi();
   },
   methods:{
-    getApi(){
-      axios.post('/api/').then(
-        function(res){
-          console.log(res)
-        }).catch(
-        function(error){
-          console.log(error);
-      })
-    }
+ 
   }
 }
 </script>

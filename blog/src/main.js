@@ -5,13 +5,19 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 import 'element-ui/lib/theme-chalk/index.css'
-import {Loading  } from 'element-ui'
+import {Loading ,Upload,Button,Icon,Input ,Radio} from 'element-ui'
 
 
 Vue.use(Loading)
+Vue.use(Radio)
+Vue.use(Input)
+Vue.use(Icon)
+Vue.use(Upload)
+Vue.use(Button)
+
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+
 new Vue({
   el: '#app',
   router,

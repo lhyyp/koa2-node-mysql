@@ -21,8 +21,8 @@ const actions={
 		    	if(res.data.code == 0){
 		    		commit('updataToken',false)
 		    	}else{
-		    		commit('updataToken',true)
-		    		commit('updataMemberInfo',res.data.data)
+		    		commit('updataToken',true);
+		    		commit('updataMemberInfo',res.data)
 		    	}
 		   
 		    }, (err) => {
