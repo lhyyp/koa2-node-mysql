@@ -30,14 +30,14 @@ let query = ( sql, values ) => {
 
 }
 let  articlepictures =
-          "CREATE TABLE `articlepictures` ("+
+          "CREATE TABLE if not exists `articlepictures` ("+
             "`id` int(11) NOT NULL AUTO_INCREMENT,"+
             "`name` varchar(255) NOT NULL COMMENT '分类名',"+
             "PRIMARY KEY (`id`)"+
           ") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;"
 
 let  banners = 
-          "CREATE TABLE `banners` ("+
+          "CREATE TABLE if not exists `banners` ("+
             "`id` int(11) NOT NULL AUTO_INCREMENT,"+
             "`src` varchar(255) NOT NULL COMMENT '图片路径',"+
             "`url` varchar(255) NOT NULL,"+
@@ -45,7 +45,7 @@ let  banners =
           ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;"
 
 let  comment =
-        "CREATE TABLE `comment` ("+
+        "CREATE TABLE if not exists `comment` ("+
          " `id` int(11) NOT NULL AUTO_INCREMENT,"+
           "`uid` int(11) NOT NULL COMMENT '用户id',"+
           "`articleId` int(11) NOT NULL COMMENT '文章id',"+
@@ -55,7 +55,7 @@ let  comment =
         ") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 
 let  article =
-         "CREATE TABLE `article` ("+
+         "CREATE TABLE if not exists `article` ("+
           "`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章id',"+
           "`author` varchar(255) NOT NULL COMMENT '作者',"+
           "`title` varchar(255) NOT NULL COMMENT '文章标题',"+
@@ -72,7 +72,7 @@ let  article =
         ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;"
 
 let  user =
-        "CREATE TABLE `user` ("+
+        "CREATE TABLE if not exists `user` ("+
         " `id` int(11) NOT NULL AUTO_INCREMENT,"+
         "`name` varchar(255) NOT NULL COMMENT '用户名',"+
         "`pass` varchar(255) NOT NULL COMMENT '密码',"+
@@ -124,19 +124,37 @@ exports.getArticlepictures = (  ) => {
   return query( _sql)
 }
 
-// 查找文章
-exports.getArtiList = ( uid ) => {
+// 查询所有文章数量
+exports.findAllPostCount = (uid) => {
   if(uid == 0){
-    let _sql = `select * from article`
+    let _sql = `select count(*) as count from article`
     return query( _sql)
   }else{
-    let _sql = `select * from article where uid="${uid}"`
+    let _sql = `select count(*) as count from article where uid="${uid}"`
     return query( _sql)
   }  
 }
+// 查询当前页的文章文章
+exports.findPostByPage = ( uid ,page ,number) => {
+  if(uid == 0){
+    let _sql = `select * from article order by pv desc limit ${(page-1)*number},${number}`
+    return query( _sql)
+  }else{
+    let _sql = `select * from article where uid="${uid}" order by id desc limit ${(page-1)*number},${number}`
+    return query( _sql)
+  } 
+}
+
+
+// 文章浏览量+1
+exports.updateCountnum = ( id ) => {
+  let _sql = `update article set pv = pv + 1 where id="${id}"`
+  return query( _sql)
+}
+
+
 // 文章详情
 exports.getArtiDeail = ( id ) => {
   let _sql = `select * from article where id="${id}"`
   return query( _sql)
- 
 }
