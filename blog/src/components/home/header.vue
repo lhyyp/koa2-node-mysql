@@ -54,7 +54,7 @@ export default {
 .header li.Message p.p-2{padding-left: 30px;}
 .header li.Message p.p-3{padding-left: 350px;}
 .header li.last{float: right;margin-top: 20px;}
-.item{height: 50px;line-height: 50px;margin: 10px 0;width: 100%;background: #6cc;text-align: center;box-shadow: 2px 2px 2px #bdbdbd;font-size: 14px;}
+.item{height: 50px;line-height: 50px;margin: 10px 0 20px;width: 100%;background: #6cc;text-align: center;box-shadow: 2px 2px 2px #bdbdbd;font-size: 14px;}
 .item li{float: left;width: 140px;color: #fff;font-size: 16px;cursor: pointer;}
 .item li+li{margin-left: 5px;}
 .item li.active{border-radius: 5px;background: #f15694;}

@@ -1,27 +1,33 @@
 <template>
   <div class="box clearfix">
     <div class="left">
-      <ul>
-         <router-link :to="{path:'/ArticleDeail',query:{ id:item.id }}" tag="li" class="article-item clearfix" v-for='item in list'>
-            <div  class="news-img-box fl">
-              <img srcset="" sizes="" :src='"/upload/"+item.picturesArticle' class="" width='205' height="140">             
-            </div> 
-            <div  class="news-content fl">
-                <h3  class="title-h3">{{item.title}}</h3> 
-                <div  class="author-info clearfix">
-                  <p class="author fl">
-                      <img  :src="/upload/+item.Headportrait" width="33" height="33"  class="author-img"> 
-                      <span >{{item.author}}</span>
-                  </p> 
-                  <span  class="date-time fl">发布时间：<em>{{item.publicationTime}}</em></span> 
-                  <span  class="classify fl">分类：{{item.classification}}</span>
-                </div> 
-                <p class="news-info">{{item.abstract}}</p>
-            </div>
-          </router-link>
-      </ul>
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10, 5]" :page-size="number" layout="total, sizes, prev, pager, next, jumper" :total="count" background class='marginB30' ></el-pagination>
+      <div v-if='list.length>0'>
+        <ul>
+           <router-link :to="{path:'/ArticleDeail',query:{ id:item.id }}" tag="li" class="article-item clearfix" v-for='item in list'>
+              <div  class="news-img-box fl">
+                <img srcset="" sizes="" :src='"/upload/"+item.picturesArticle' class="" width='205' height="140">             
+              </div> 
+              <div  class="news-content fl">
+                  <h3  class="title-h3">{{item.title}}</h3> 
+                  <div  class="author-info clearfix">
+                    <p class="author fl">
+                        <img  :src="/upload/+item.Headportrait" width="33" height="33"  class="author-img"> 
+                        <span >{{item.author}}</span>
+                    </p> 
+                    <span  class="date-time fl">发布时间：<em>{{item.publicationTime}}</em></span> 
+                    <span  class="classify fl">分类：{{item.classification}}</span>
+                  </div> 
+                  <p class="news-info">{{item.abstract}}</p>
+              </div>
+            </router-link>
+        </ul>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10, 5]" :page-size="number" layout="total, sizes, prev, pager, next, jumper" :total="count" background class='marginB30' ></el-pagination>
+      </div>
+      <div v-else>
+        暂无数据
+      </div>
       
+
     </div>
     <div class="right">
       right
@@ -97,7 +103,6 @@
               this.count = res.data.count;
             }else{
               this.list = [];
-              alert(res.data.msg)
             }
           }).catch(
           function(error){
@@ -110,7 +115,7 @@
 <style scoped>
 .left{float: left;width: 860px;}
 .right{float: right;width: 290px;background: #fff;}
-.article-item{padding: 25px 0; background: #fff;border-bottom: 1px solid #f0f0f0;margin: 10px 0; cursor: pointer;}
+.article-item{padding: 25px 0; background: #fff;border-bottom: 1px solid #f0f0f0;margin-bottom:  20px ; cursor: pointer;}
 .article-item:hover{    border-radius: 4px; box-shadow: 1px 3px 9px #ccc; transition: .3s;} .fl{float: left;}
 .news-content{width: 615px;margin-left: 20px;}
 .title-h3{height: 40px;line-height: 40px;font-size: 16px;}

@@ -14,7 +14,15 @@
               作者：<span class="author marginL10">{{ArtiDeailList.author}}</span>
             </li>
           </ul>
-          <div v-html="ArtiDeailList.content"></div>
+          <div v-html="ArtiDeailList.content" class="content"></div>
+          <div v-if='this.$store.getters.getToken == true'>
+            <el-input type="textarea" :rows="5" placeholder="请输入评论" v-model="comment" class='marginB20' resize='none'> </el-input>
+            <el-button type="primary">发表留言</el-button>
+          </div>
+          <div v-else>
+              登录之后才可以评论哟,<router-link  to="/login" class='login'>立即登录</router-link> 
+          </div>
+          
       </div>
       <div class="right">
         right
@@ -32,7 +40,8 @@
     name: 'ArticleDeail',
     data () {
       return {
-       ArtiDeailList:{}
+       ArtiDeailList:{},
+       comment:null
       }
     },
     components:{
@@ -53,16 +62,19 @@
             }
           )
       },
-      addCountnum (){    //浏览量
+      addCountnum (){    
 
       }   
     }
   }
 </script>
 <style scoped>
-.left{float: left;width: 840px;background: #fff;padding: 20px 10px;}
+.left{float: left;width: 840px;padding: 20px 10px;}
 .right{float: right;width: 290px;background: #fff;}
 .left .tilte{height: 50px;line-height: 50px;font-size: 20px;color: #0088db;text-align: center;}
 .ArtiMessage{display: flex;display: -webkit-flex;justify-content:space-around;padding: 15px 0;border-top: 1px dashed #999;border-bottom: 1px dashed #999;}
 .marginL10{margin-left: 10px;}
+.content{padding: 10px 0;}
+.marginB20{margin: 20px 0;}
+.login{color: #029bf0;margin-left: 10px;}
 </style>
