@@ -2,19 +2,18 @@ const userModel = require('../lib/SQL.js')
 const moment = require('moment');
 // 获取banner列表
 exports.getBannerList = async ctx => {
-    await userModel.getBanners()
-        .then(result => {
-            ctx.body = {
-                code: 1,
-                result: result
-            };
-        }).catch(err => {
-            ctx.body = {
-                code: 500,
-                message: err
-            };
-            console.log(err)
-        })
+    await userModel.getBanners().then(result => {
+        ctx.body = {
+            code: 1,
+            result: result
+        };
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            message: err
+        };
+        console.log(err)
+    })
 
 }
 // 发表文章页面
@@ -46,30 +45,33 @@ exports.getCreate = async ctx => {
 
 // 查找所有的文章分类
 exports.getArticlepictures = async ctx => {
-    await userModel.getArticlepictures()
-        .then(result => {
-            ctx.body = {
-                code: 1,
-                result: result
-            };
-        }).catch(err => {
-            ctx.body = {
-                code: 500,
-                message: err
-            };
-        })
+    await userModel.getArticlepictures().then(result => {
+        ctx.body = {
+            code: 1,
+            result: result
+        };
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            message: err
+        };
+    })
 
 }
 
 // 查找文章列表   id  => 用户id  0 => 所有文章
 exports.getArtiList = async ctx => {
-    let uid = ctx.request.query.id
-    await userModel.getArtiList(uid)
-        .then(result => {
+    let uid = ctx.request.query.id;
+    let page = ctx.request.query.page;
+    let number = ctx.request.query.number;
+    await userModel.findAllPostCount( uid , page ).then(async (result) => {
+        let count = result[0].count;   //总页数
+        await userModel.findPostByPage( uid , page ,number).then(result => {
             if(result.length>0){
                 ctx.body = {
                     code: 200,
                     msg:'请求成功',
+                    count: count,
                     result: result
                 };
             }else{
@@ -77,23 +79,27 @@ exports.getArtiList = async ctx => {
                     code: 0,
                     msg:'暂无数据'
                 };
-            }
-            
+            }        
         }).catch(err => {
             ctx.body = {
                 code: 500,
                 message: err
             };
         })
+       
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            message: err
+        };
+    })
 }
-
 
 // 文章详情   id  => 文章id
 exports.getArtiDeail = async ctx => {
     let id = ctx.request.query.id
-    await userModel.getArtiDeail(id)
-        .then(result => {
-            console.log(moment().format('YYYY-MM-DD HH:mm:ss'))
+    await userModel.updateCountnum(id).then(async (result) =>{
+        await userModel.getArtiDeail(id).then(result => {
             if(result.length>0){
                 ctx.body = {
                     code: 200,
@@ -105,12 +111,17 @@ exports.getArtiDeail = async ctx => {
                     code: 0,
                     msg:'找不到该文章'
                 };
-            }
-            
+            }                
         }).catch(err => {
             ctx.body = {
                 code: 500,
                 message: err
             };
         })
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            message: err
+        }
+    })      
 }
