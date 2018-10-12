@@ -93,6 +93,7 @@ export default {
               customClass:'message'
             });
             this.$store.commit('updataMemberInfo',res.data.result);
+            this.$store.commit('updataToken',true);
             this.timer = setTimeout(() => {
               this.$router.push({path: '/'});
             },2000)
