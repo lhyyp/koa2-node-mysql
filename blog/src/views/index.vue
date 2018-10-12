@@ -3,7 +3,7 @@
 <div>
    <my-header></my-header>
    <my-aside></my-aside>
-   <router-view/>
+   <router-view :key="key"></router-view>
 </div>
  
 </template>
@@ -18,7 +18,6 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: ''
     }
   },
   components:{
@@ -27,6 +26,11 @@ export default {
   mounted(){
     // this.getApi();
   },
+ computed: {
+    key() {
+      return this.$route.name !== undefined? this.$route.name + +new Date(): this.$route + +new Date()
+    }
+ },
   methods:{
     getApi(){
       axios.post('/api/').then(

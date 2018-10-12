@@ -8,10 +8,10 @@ const router = new Router({
 	mode: 'history',
     history: true,
   routes: [
-    {path: '/', name: 'index', component: (resolve) => require(['@/views/index.vue'],resolve),
+    {path: '/',component: (resolve) => require(['@/views/index.vue'],resolve),
     	children:[
 	       {path:'/',name:'index',component:(resolve) => require(['@/views/home/index'],resolve)},	       
-	       {path:'/MyArticle',name:'MyArticle',component:(resolve) => require(['@/views/home/article'],resolve)},
+	       {path:'/Article',name:'Article',component:(resolve) => require(['@/views/home/article'],resolve)},
 	       {path:'/MyArticle/id=:id',name:'MyArticle',meta: { requireAuth: true},component:(resolve) => require(['@/views/home/article'],resolve)}	       
 	    ]
     },
@@ -23,16 +23,15 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-
-    	store.dispatch('loginmess').then(()=>{
     		if(to.name == 'login' || to.name == 'register'){
     			if (store.getters.getToken) {  // 通过vuex state获取当前的token是否存在
 		            next({ path: '/'});
 		        }else {
-		            next()
+		        	next();
 		        }
 	    	}else{
 	    		if (store.getters.getToken) {  // 通过vuex state获取当前的token是否存在
+	    			console.log(1)
 		            next();
 		        }else {
 		            next({
@@ -42,7 +41,7 @@ router.beforeEach((to, from, next) => {
 		        }
 	    	}
 	        
-    	})
+    	
     	
     }else {
         next();

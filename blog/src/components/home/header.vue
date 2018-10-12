@@ -9,8 +9,8 @@
       <li class="last"><img src="../../assets/images/tea.jpg"></li>
     </ul>
     <ul class="item">
-      <router-link tag="li" to="/" active-class = "active" exact>Home</router-link> 
-      <router-link tag="li" to='/MyArticle' active-class = "active" exact>全部文章</router-link>
+      <router-link tag="li" to="/" active-class = "active" exact>首页</router-link> 
+      <router-link tag="li" to='/Article' active-class = "active" exact>全部文章</router-link>
       <router-link tag="li" :to="'/MyArticle/id='+memberInfo.id" active-class = "active" v-show="isShow" exact>我的文章</router-link>
     </ul>
   </div>
@@ -30,7 +30,10 @@ export default {
     }
   },
   mounted(){
-    this.$store.dispatch('loginmess').then(()=>{
+    this.onOff();   
+  },
+  methods:{
+    onOff(){
       if(this.$store.getters.getToken){  // 通过vuex state获取当前的token是否存在  
         this.show = false;
         this.isShow = true;
@@ -38,11 +41,8 @@ export default {
       }else{
         this.show = true;
         this.isShow = false;
-
       }
-    })
-  },
-  methods:{
+    }
   }
 }
 </script>

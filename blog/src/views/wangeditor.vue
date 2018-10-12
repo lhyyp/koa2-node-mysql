@@ -108,9 +108,9 @@ export default {
               message: res.data.message,
               customClass:'message'
             });
-            this.$store.commit('updataMemberInfo',res.data.result);
+
             this.timer = setTimeout(() => {
-              this.$router.push({path: '/'});
+              this.$router.push({name: 'MyArticle', params: {id: this.$store.getters.getMemberInfo.id}})
             },2000)
             
           }else{

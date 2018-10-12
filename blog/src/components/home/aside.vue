@@ -2,7 +2,7 @@
   <ul class="aside">
      <router-link tag="li" v-show="show" to="/login" >登录</router-link> 
      <router-link tag="li" v-show="show" to="/register" >注册</router-link>
-     <router-link tag="li" v-show="isShow" to="/" >{{memberInfo.name}}的文章</router-link> 
+     <router-link tag="li" v-show="isShow" :to="'/MyArticle/id='+memberInfo.id" >{{memberInfo.name}}的文章</router-link> 
       <router-link tag="li" v-show="isShow" to="/wangeditor" >发表文章</router-link> 
      <li v-show="isShow" @click='logout()'>退出</li>
        <router-link tag="li" to="/" >首页</router-link> 
@@ -24,7 +24,10 @@ export default {
     }
   },
   mounted(){
-    this.$store.dispatch('loginmess').then(()=>{
+    this.onOff();
+  },
+  methods:{
+    onOff(){
       if(this.$store.getters.getToken){  // 通过vuex state获取当前的token是否存在  
         this.show = false;
         this.isShow = true;
@@ -32,11 +35,8 @@ export default {
       }else{
         this.show = true;
         this.isShow = false;
-
       }
-    })
-  },
-  methods:{
+    },
     logout(){
       axios.get('/api/logout').then(
         (res) => {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 const state={
-	token:0,
+	token:null,
 	memberInfo:{1:1}
 }
 const getters={
