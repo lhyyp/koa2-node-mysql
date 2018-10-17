@@ -24,9 +24,7 @@ export default {
     return {
       show:'',
       isShow:'',
-      memberInfo:'',
-
-      msg: ''
+      memberInfo:''
     }
   },
   mounted(){

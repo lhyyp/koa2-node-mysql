@@ -3,7 +3,7 @@
     <div class="left">
       <div v-if='list.length>0'>
         <ul>
-           <router-link :to="{path:'/ArticleDeail',query:{ id:item.id }}" tag="li" class="article-item clearfix" v-for='item in list'>
+           <router-link :to="{path:'/ArticleDeail',query:{ id:item.id }}" tag="li" class="article-item clearfix" v-for='(item,index) in list' :key='index'>
               <div  class="news-img-box fl">
                 <img srcset="" sizes="" :src='"/upload/"+item.picturesArticle' class="" width='205' height="140">             
               </div> 
@@ -45,18 +45,10 @@
         page:1,                  //当前页码
         number:5,                //每页条数
         count :null,               //总页数
-        list:null,                //文章列表
+        list:[],                //文章列表
         getArticlepicture:null   //所有文章分类
       }
     },
-    /*
-    watch: {
-      '$route' (to, from) {   //方法-：通过监听路由变化，（多个路由对应的同一个组件），重新加载当前组件；
-                              // 方法二：在上级路由设置key <router-view :key="key"></router-view>
-         this.getStus();
-      }
-    },
-    */
     mounted(){
       this.getArticlepictures();   //获取所有文章分类
       this.getStus();

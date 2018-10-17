@@ -95,7 +95,7 @@ export default {
             this.$store.commit('updataMemberInfo',res.data.result);
             this.$store.commit('updataToken',true);
             this.timer = setTimeout(() => {
-              this.$router.push({path: '/'});
+              this.$router.push({path: decodeURIComponent(this.$route.query.redirect || '/')});
             },2000)
             
           }else{

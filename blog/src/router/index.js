@@ -23,26 +23,23 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-    		if(to.name == 'login' || to.name == 'register'){
-    			if (store.getters.getToken) {  // 通过vuex state获取当前的token是否存在
-		            next({ path: '/'});
-		        }else {
-		        	next();
-		        }
-	    	}else{
-	    		if (store.getters.getToken) {  // 通过vuex state获取当前的token是否存在
-	    			console.log(1)
-		            next();
-		        }else {
-		            next({
-		                path: '/login',
-		                query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-		            })
-		        }
-	    	}
-	        
-    	
-    	
+		if(to.name == 'login' || to.name == 'register'){
+			if (store.getters.getToken) {  // 通过vuex state获取当前的token是否存在
+	            next({ path: '/'});
+	        }else {
+	        	router.app.urls = from.fullPath
+	        	next();
+	        }
+    	}else{
+    		if (store.getters.getToken) {  // 通过vuex state获取当前的token是否存在
+	            next();
+	        }else {
+	            next({
+	                path: '/login',
+	                query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+	            })
+	        }
+    	}
     }else {
         next();
     }

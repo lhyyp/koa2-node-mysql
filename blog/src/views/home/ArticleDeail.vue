@@ -15,14 +15,11 @@
             </li>
           </ul>
           <div v-html="ArtiDeailList.content" class="content"></div>
-          <div v-if='this.$store.getters.getToken == true'>
-            <el-input type="textarea" :rows="5" placeholder="请输入评论" v-model="comment" class='marginB20' resize='none'> </el-input>
-            <el-button type="primary">发表留言</el-button>
-          </div>
+          <ReplyTextarea :id='0' :uid='0' v-on:addComment="addComment"  v-model="aaa" class='ReplyText' v-if='this.$store.getters.getToken == true'></ReplyTextarea>
           <div v-else>
               登录之后才可以评论哟,<router-link  to="/login" class='login'>立即登录</router-link> 
-          </div>
-          
+          </div>  
+          <my-commentsList></my-commentsList>    
       </div>
       <div class="right">
         right
@@ -35,36 +32,44 @@
 </template>
 <script>
   import myAside from '@/components/home/aside'
+  import myCommentsList from '@/components/home/CommentsList'
+  import ReplyTextarea from '@/components/home/ReplyTextarea'
   import axios from 'axios'
   export default {
     name: 'ArticleDeail',
     data () {
       return {
        ArtiDeailList:{},
-       comment:null
+       aaa  : null
+       
       }
     },
     components:{
-      myAside
+      myAside,myCommentsList,ReplyTextarea
     },
     mounted(){
       this.getArtiDeail();
     },
     methods:{
+       addComment(val){
+          this.aaa = null;
+          let data = {};
+          data.articleId = this.$route.query.id;
+          data.page = this.$store.getters.getPage ;
+          data.number = this.$store.getters.getNumber;
+          this.$store.dispatch('list',data)
+       },
        getArtiDeail () {    //获取文章详情
           axios.get('/api/getArtiDeail/?id='+this.$route.query.id).then(
           (res) => {
-            this.ArtiDeailList = res.data.result;   
-            console.log(this.ArtiDeailList)    
+            this.ArtiDeailList = res.data.result; 
           }).catch(
             (error) => {
               Message('服务器错误');
             }
           )
-      },
-      addCountnum (){    
-
-      }   
+      }
+       
     }
   }
 </script>

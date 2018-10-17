@@ -42,7 +42,6 @@ export default {
     myAside
   },
   mounted(){
-    // this.getApi();
   },
   beforeDestroy() {
      clearTimeout(this.timer)
@@ -72,7 +71,7 @@ export default {
             this.$store.commit('updataMemberInfo',res.data.result[0]);
             this.$store.commit('updataToken',true);
             this.timer = setTimeout(() => {
-              this.$router.push({path: '/'});
+              this.$router.push({path: decodeURIComponent(this.$route.query.redirect  || this.$router.app.urls ||'/')});
             },2000)
             
           }else{
