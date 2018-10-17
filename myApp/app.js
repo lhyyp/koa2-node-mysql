@@ -18,9 +18,11 @@ const getUploadFileExt = require('./utils/getUploadFileExt');
 const getUploadFileName = require('./utils/getUploadFileName');
 const checkDirExist = require('./utils/checkDirExist');
 const getUploadDirName = require('./utils/getUploadDirName');
+
+
+
 app.use(koaBody({
   multipart: true,
-  encoding: 'gzip',
   formidable: {
     uploadDir: path.join(__dirname, 'public/upload'),
     keepExtensions: true,
