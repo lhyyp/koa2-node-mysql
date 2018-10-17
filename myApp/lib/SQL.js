@@ -51,6 +51,8 @@ let  comment =
           "`articleId` int(11) NOT NULL COMMENT '文章id',"+
           "`content` text NOT NULL COMMENT '评论内容',"+
           "`commentTime` datetime NOT NULL COMMENT '评论时间',"+
+          "`cid` int(11) NOT NULL COMMENT '跟随原有评论的id来产生新的评论关联cid,默认0,',"+
+          "`pid` int(11) NOT NULL COMMENT '回复的评论的uid 默认0',"+
           "PRIMARY KEY (`id`)"+
         ") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 
@@ -158,3 +160,34 @@ exports.getArtiDeail = ( id ) => {
   let _sql = `select * from article where id="${id}"`
   return query( _sql)
 }
+
+
+// 插入评论
+exports.insertComment = ( value ) => {
+  let _sql = "insert into comment set uid=?,articleId=?,content=?,commentTime=?,cid=?,pid=?"
+  return query( _sql, value )
+}
+
+
+// 文章评论+1
+exports.updateComments = ( id ) => {
+  let _sql = `update article set comments = comments + 1 where id="${id}"`
+  return query( _sql)
+}
+
+//查询文章评论（时间倒叙10）
+exports.getComments = ( articleId ,page ,number) => {
+  let _sql = `select c.*,u.name,u.avator from comment as c LEFT JOIN user as u on c.uid = u.id where c.cid=0 and c.articleId = "${articleId}" order by c.commentTime desc limit ${(page-1)*number},${number}`
+  return query( _sql)
+}
+//查询评论下的评论
+exports.getCommentsList = ( cid ) => {
+  let _sql = `select c.*,u.name,u.avator,u2.name as pName from comment as c LEFT JOIN user as u on c.uid = u.id left join (select * from user) as u2 on c.pid = u2.id where c.cid= "${cid}" order by c.commentTime `
+  return query( _sql)
+}
+// 查询所有评论数量
+exports.getCommentsNumber = (articleId) => {
+  let _sql = `select count(*) as count from comment where articleId="${articleId}" and cid = 0`
+  return query( _sql)
+}
+
