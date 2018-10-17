@@ -44,5 +44,9 @@ router.get('/getArticlepictures', controller.getArticlepictures)
 router.get('/getArtiList', controller.getArtiList)
 // 文章详情
 router.get('/getArtiDeail', controller.getArtiDeail)
+// 评论文章
+router.post('/addComments', controller.addComments)
+// 文章评论列表
+router.get('/getCommentsList', controller.getCommentsList)
 
 module.exports = router
