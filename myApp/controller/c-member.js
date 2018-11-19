@@ -40,6 +40,7 @@ exports.login = async ctx => {
 //退出登录
 exports.logout = async ctx => {
     ctx.session = null;
+    
     ctx.body = {
         code: 200,
         message: '退出成功'

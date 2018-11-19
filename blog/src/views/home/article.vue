@@ -54,7 +54,7 @@
       this.getStus();
     },
     methods:{
-       handleSizeChange(val) {   //val => 每页条数
+      handleSizeChange(val) {   //val => 每页条数
         this.number = val;
         this.getStus();
       },
@@ -118,6 +118,4 @@
 .author-info .date-time em{font-style: normal;}
 .news-info{color: #526163; overflow: hidden; font-size: 14px; padding-top:10px ;overflow : hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
 .marginB30{margin-bottom: 30px;}
-
-
 </style>

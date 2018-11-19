@@ -61,9 +61,9 @@ exports.getArticlepictures = async ctx => {
 
 // 查找文章列表   id  => 用户id  0 => 所有文章
 exports.getArtiList = async ctx => {
-    let uid = ctx.request.query.id;
-    let page = ctx.request.query.page;
-    let number = ctx.request.query.number;
+    let uid = ctx.request.query.id || 0;
+    let page = ctx.request.query.page || 1;
+    let number = ctx.request.query.number || 5;
     await userModel.findAllPostCount( uid  ).then(async (result) => {
         let count = result[0].count;   //总页数
         await userModel.findPostByPage( uid , page ,number).then(result => {
@@ -146,6 +146,18 @@ exports.addComments = async ctx => {
         pid =   ctx.request.body.pid || 0,
         commentTime =  moment().format('YYYY-MM-DD HH:mm:ss'),
         uid = ctx.session.id;
+    if(!uid){
+        ctx.body = {
+            code: 500,
+            msg:'请先登录'
+        };  
+    } 
+    if(!content){
+        ctx.body = {
+            code: 500,
+            msg:'评论内容为空'
+        };  
+    }    
     await userModel.insertComment([uid , articleId, content, commentTime , cid,pid]).then(async (result) =>{
         await userModel.updateComments(uid).then(result => {
             ctx.body = {
