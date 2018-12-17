@@ -3,6 +3,7 @@
     <h2 class="tilte">{{ArtiDeailList.title}}</h2>
     <ul class="ArtiMessage">
       <li class="item-time">
+        
         编辑时间：<span class="date-time marginL10">{{ArtiDeailList.publicationTime}}</span>
       </li>
       <li class="Browse ">
