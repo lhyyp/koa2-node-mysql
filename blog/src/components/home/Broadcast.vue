@@ -2,7 +2,7 @@
 <div class="bannerCom">
 
   <transition-group tag="ul" name="image" class="item left">
-    <li @mouseout='move()' @mouseover='stop()' v-show="index===mark" ref="index" v-for='(item , index) in list' :key='index'><img :src="'/static/images/'+item.src"></li>
+    <li @mouseout='move()' @mouseover='stop()' v-show="index===mark" ref="index" v-for='(item , index) in list' :key='item.id'><img :src="'/static/images/'+item.src"></li>
   </transition-group>
   <div class="right">
     <div class="hoverBg" ref="hoverBg"></div>
