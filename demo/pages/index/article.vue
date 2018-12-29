@@ -57,9 +57,13 @@
 				number:5                 //每页条数
 			}
 	    },
+	    mounted(){
+
+	    },
 		methods: {
 			handleSizeChange(val) {   //val => 每页条数
 				this.number = val;
+				this.page = 1;
 				this.getStus();
 			},
 			handleCurrentChange(val) {     //val => 当前页码

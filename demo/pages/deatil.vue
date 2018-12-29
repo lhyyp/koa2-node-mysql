@@ -3,7 +3,6 @@
     <h2 class="tilte">{{ArtiDeailList.title}}</h2>
     <ul class="ArtiMessage">
       <li class="item-time">
-        
         编辑时间：<span class="date-time marginL10">{{ArtiDeailList.publicationTime}}</span>
       </li>
       <li class="Browse ">
@@ -16,7 +15,7 @@
     <div v-html="ArtiDeailList.content" class="content"></div>
     <ReplyTextarea :id='0' :uid='0' class='ReplyText' v-model="val" v-on:addComment="addComment" v-if='this.$store.getters.getToken == true'/>
     <div v-else>
-        登录之后才可以评论哟,<router-link  to="/login" class='login'>立即登录</router-link> 
+        登录之后才可以评论哟,<router-link  to="/members/login" class='login'>立即登录{{this.$store.getters.getToken}}</router-link> 
     </div>  
     <commentsList :List = 'List' :Count='Count'/>
   </div>
@@ -73,4 +72,5 @@ export default {
 .marginB20 {margin: 20px 0; }
 .login {color: #029bf0; margin-left: 10px; }
 .div_login{margin: 15px 0;}
+
 </style>

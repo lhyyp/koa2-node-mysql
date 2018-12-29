@@ -10,13 +10,23 @@
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate"
   },
+  "config": {
+    "nuxt": {
+      "host": "127.0.0.1",
+      "port": "88"
+    }
+  },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
     "axios": "^0.18.0",
     "cross-env": "^5.2.0",
+    "echarts": "^4.2.0-rc.2",
     "element-ui": "^2.4.6",
     "koa": "^2.5.2",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "v-charts": "^1.19.0",
+    "vue-amap": "^0.5.8",
+    "wangeditor": "^3.1.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",

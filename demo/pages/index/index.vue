@@ -1,16 +1,21 @@
 <template>
-	<div class="clearfix">
-        <banner :bannerList="bannerList"/>
-        <div class="right">
-          <canvas width="200" height="200"  ref="canvas"></canvas>
+    <div>
+       <div class="clearfix">
+            <banner :bannerList="bannerList"/>
+            <div class="right">
+              <canvas width="200" height="200"  ref="canvas"></canvas>
+            </div>
         </div>
-	</div>
+        <vueMap/>
+    </div>
+	
 </template>
 <script>
 import banner from '~/components/banner.vue'
+import vueMap from '~/components/map.vue'
 export default {
   components: {
-    banner
+    banner,vueMap
   },
   async asyncData (app) {
     let bannerList = await app.$axios.get('/api/getBanner');

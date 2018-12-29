@@ -1,16 +1,16 @@
 <template>
-<div class="bannerCom">
-  <transition-group tag="ul" name="image" class="item left">
-    <li @mouseout='move()' @mouseover='stop()' v-show="index===mark" ref="index" v-for='(item , index) in bannerList' :key='index'><img :src="'/upload/images/'+item.src"></li>
-  </transition-group>
-  <div class="right">
-    <div class="hoverBg" ref="hoverBg"></div>
-    <ul class="list">
-      <li  @click='change(index)' @mouseover='change(index)' @mouseout='move()' :class="{ 'active':index===mark }" v-for='(item , index) in bannerList' :key='index'><img :src="'/upload/images/'+item.src" ></li>
-    </ul>
-  </div>
+  <div class="bannerCom">
+    <transition-group tag="ul" name="image" class="item left">
+      <li @mouseout='move' @mouseover='stop' v-show="index===mark" ref="index" v-for='(item,index) in bannerList' :key='item.id'><img :src="'/upload/images/'+item.src"></li>
+    </transition-group>
+    <div class="right">
+      <div class="hoverBg" ref="hoverBg"></div>
+      <ul class="list">
+        <li  @click='change(index)' @mouseover='change(index)' @mouseout='move' :class="{ 'active':index===mark }" v-for='(item , index) in bannerList' :key='index'><img :src="'/upload/images/'+item.src" ></li>
+      </ul>
+    </div>
 
-</div>
+  </div>
 </template>
 <script>
 import axios from 'axios'
@@ -27,6 +27,8 @@ export default {
      this.stop();
   },
   props:['bannerList'],
+  mounted(){
+  },
   methods:{
     autoPlay () {     
       this.mark++; 

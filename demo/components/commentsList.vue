@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="marginT30">
     <div v-if='getList.length'>
           <ul >
             <li v-for = '(item,index) in getList' :key='index' class='commentItem'>
@@ -141,7 +141,6 @@ li{list-style: none;}
 .time img{height: 17px;}
 .single-reply{padding: 5px 0 5px 50px;}
 .single-reply .commentText{width: 720px;}
-.box,.marginT30{margin-top: 30px;}
-.marginT30{margin-bottom: 30px;}
+.marginT30{margin-top: 30px;}
 .ReplyText{display: none}
 </style>

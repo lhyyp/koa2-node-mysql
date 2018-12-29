@@ -34,7 +34,10 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/vue-map',
+    '~/plugins/route',
+    '~/plugins/charts'
   ],
 
   /*
@@ -76,6 +79,24 @@ module.exports = {
       }
     }
   ],
+  router: {    
+    middleware: 'stats',     //中间件跳转路由之前都要调用这个方法
+    // extendRoutes (routes, resolve) {
+      // let metaArr = ['/deatil'];
+      // metaArr.forEach((item) => {
+      //   routes.forEach((routesItem)=>{
+      //     if(item == routesItem.path){
+      //         console.log(routesItem)
+      //     }
+      //   })
+      // })
+      // routes.push({
+      //   name: 'custom',
+      //   path: '*',
+      //   component: resolve(__dirname, 'pages/404.vue')
+      // })
+    // }
+  },
 
   /*
   ** Build configuration

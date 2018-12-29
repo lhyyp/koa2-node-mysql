@@ -1,6 +1,6 @@
 import axios from 'axios'
 const state = {
-	token:false,
+	token:null,
 	list:[],
 	Count: null,    //总页数
 	page:1,                  //当前页码

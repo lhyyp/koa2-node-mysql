@@ -1,11 +1,11 @@
 <template>
   <ul class="aside">
-     <router-link tag="li" v-show="show" to="/members/login" >登录</router-link> 
-     <router-link tag="li" v-show="show" to="/members/register" >注册</router-link>
-      <router-link tag="li" v-show="isShow" to="/wangeditor" >发表文章</router-link> 
-     <li v-show="isShow" @click='logout()'>退出</li>
-       <router-link tag="li" to="/" >首页</router-link> 
-     <router-link tag="li" to="https://github.com/lhyyp/koa2-node-mysql" >Github</router-link>
+      <nuxt-link tag="li" v-show="show" to="/members/login" >登录</nuxt-link> 
+      <nuxt-link tag="li" v-show="show" to="/members/register" >注册</nuxt-link>
+      <nuxt-link tag="li" v-show="isShow" to="/wangeditor" >发表文章</nuxt-link> 
+      <li v-show="isShow" @click='logout()'>退出</li>
+       <nuxt-link tag="li" to="/" >首页</nuxt-link> 
+      <nuxt-link tag="li" to="https://github.com/lhyyp/koa2-node-mysql" >Github</nuxt-link>
   </ul>
  
 </template>
