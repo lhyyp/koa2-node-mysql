@@ -8,11 +8,11 @@ exports.getBannerList = async ctx => {
             result: result
         };
     }).catch(err => {
+        console.log(err)
         ctx.body = {
             code: 500,
             message: err
         };
-        console.log(err)
     })
 
 }
@@ -51,6 +51,7 @@ exports.getArticlepictures = async ctx => {
             result: result
         };
     }).catch(err => {
+        console.log(err)
         ctx.body = {
             code: 500,
             message: err

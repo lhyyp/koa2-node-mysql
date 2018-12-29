@@ -10,7 +10,6 @@ const pool  = mysql.createPool({
 });
 
 let query = ( sql, values ) => {
-
   return new Promise(( resolve, reject ) => {
     pool.getConnection( (err, connection) => {
       if (err) {
@@ -151,7 +150,7 @@ exports.findPostByPage = ( uid ,page ,number) => {
 // 文章浏览量+1
 exports.updateCountnum = ( id ) => {
   let _sql = `update article set pv = pv + 1 where id="${id}"`
-  return query( _sql)
+  return   query( _sql)
 }
 
 

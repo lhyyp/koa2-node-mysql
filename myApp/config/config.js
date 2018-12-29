@@ -5,11 +5,10 @@ const config = {
   database: {
     DATABASE: 'blog',
     USERNAME: 'root',
-    PASSWORD: '',
+    PASSWORD: 'root',
     PORT: '3306',
     HOST: 'localhost',
     dateStrings: true
-
   }
 }
 
