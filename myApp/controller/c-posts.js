@@ -16,6 +16,25 @@ exports.getBannerList = async ctx => {
     })
 
 }
+//添加banner
+exports.addBanner = async ctx => {
+    let data = ctx.request.body;   
+    await userModel.insertBanners().then(result => {
+        ctx.body = {
+            code: 1,
+            result: result
+        };
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            message: err
+        };
+    })
+
+}
+
+
+
 // 发表文章页面
 exports.getCreate = async ctx => {
     let {  title ,content ,classification,abstract } = ctx.request.body;

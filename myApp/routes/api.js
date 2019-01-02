@@ -19,6 +19,8 @@ router.get('/islogin',async (ctx, next) => {
 
 // 获取banner列表
 router.get('/getBanner',controller.getBannerList )
+// 添加banner
+router.post('/addBanner',controller.addBanner )
 //登录
 router.get('/login',Member.login)
 
@@ -28,11 +30,11 @@ router.get('/logout',Member.logout)
 router.post('/register',Member.register)
 
 //副富文本编辑器上传图片
-router.post('/uploadImg',async ctx => {	// ctx.uploadpath.files = >获取上传后文件的信息
+router.post('/uploadImg',async ctx => {	// ctx.uploadpath.file = >获取上传后文件的信息
 	ctx.body = {
 		'code' : 200,
 		'message' : '上传成功',
-		'data' : '/upload/'+ctx.uploadpath.files
+		'data' : '/upload/'+ctx.uploadpath.file
 	}
 } )
 // 发表文章页面

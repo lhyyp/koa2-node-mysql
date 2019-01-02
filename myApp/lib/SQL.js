@@ -99,6 +99,12 @@ exports.getBanners = ( value ) => {
   let _sql = "select * from banners "
   return query( _sql, value )
 }
+// 添加banner
+exports.insertBanners = ( value ) => {
+  let _sql = "insert into banners set src=?,url=?"
+  return query( _sql, value )
+}
+
 
 // 通过名字查找该用户
 exports.login = ( name ) => {

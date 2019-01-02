@@ -28,10 +28,14 @@
 			    <i class="el-icon-setting"></i>
 			    <span slot="title">首页</span>
 		 	</el-menu-item>
-		  	<el-menu-item index="/admin/banner">
-			    <i class="el-icon-setting"></i>
-			    <span slot="title">配置</span>
-		 	</el-menu-item>
+			<el-submenu index="/admin/banner">
+				<template slot="title">
+					<i class="el-icon-location"></i>
+					<span slot="title">配置</span>
+				</template>
+				<el-menu-item index="/admin/banner">banner</el-menu-item>
+				<el-menu-item index="/admin/ArticleManagement">文章管理</el-menu-item>
+			</el-submenu>
 		</el-menu>
  	</div>
 </template>

@@ -1,6 +1,6 @@
 <template>
 <div class="box">
- <span>{{title}}：</span>
+  <span>{{title}}：</span>
   <label class="file_label" >
       <input type="file" style='file' class="file"  @change='checkFile' ref='file'>
       <img v-if="imageUrl" :src="imageUrl" class="avatar">
