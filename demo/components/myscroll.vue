@@ -1,4 +1,4 @@
-https://github.com/lhyyp/koa2-node-mysql.git<template>
+<template>
 	<div class="contianer">
 	    <ul class="clearfix " :style="{width:getWith(),left:num+'px'}">
 	    	<li v-for="(item,index) in arr" :key="index" class="item fl">{{item}}</li>
@@ -37,9 +37,11 @@ https://github.com/lhyyp/koa2-node-mysql.git<template>
 <style>
 .item{width: 285px;height: 280px;background: #ccc;color: #fff;text-align: center;line-height: 280px;}
 .item+.item{margin-left: 20px;}
+.contianer:hover .leftBtn.btn {display: block;}
+.contianer:hover .rightBtn.btn{display: block;}
 .contianer{width: 1200px;height: 320px;padding: 20px 0;box-sizing:border-box;margin:0 auto;position: relative;overflow: hidden;}
 .contianer ul{transition: all 1.2s ease;position: absolute;}
-.btn{ ulwidth: 40px;height: 140px;background: #333;position: absolute;top:70px;}
+.btn{ width: 40px;height: 140px;background: #333;position: absolute;top:70px;display: none;}
 .leftBtn{left: 0;}
 .rightBtn{right:0;}
 .btn span{border-top:1px solid #fff;border-right:1px solid #fff;display: block;width: 20px;height: 20px;margin:60px 10px;}
