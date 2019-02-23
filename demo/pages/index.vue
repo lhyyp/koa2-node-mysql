@@ -28,6 +28,7 @@ body{font-family: 'microsoft yahei';background: #f5f5f5;}
 #app{width: 1200px;margin: 0 auto; }
 .clearfix:after {content: ''; display: block; clear: both; }
 .clearfix {zoom: 1; }
+.fl{float: left;}
 .bg{background: url('~assets/images/bg.jpg');  position: fixed; top: 0; left: 0; z-index: -1; height: 100vh; width: 100vw;} 
 .container{width: 1200px;margin: 0 auto;background: #fff;}
 .body{padding-bottom: 50px;}

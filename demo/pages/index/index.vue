@@ -6,16 +6,18 @@
               <canvas width="200" height="200"  ref="canvas"></canvas>
             </div>
         </div>
-        <vueMap/>
+        <myscroll/>
+        <!-- <vueMap/> -->
     </div>
 	
 </template>
 <script>
 import banner from '~/components/banner.vue'
 import vueMap from '~/components/map.vue'
+import myscroll from '~/components/myscroll.vue'
 export default {
   components: {
-    banner,vueMap
+    banner,vueMap,myscroll
   },
   async asyncData (app) {
     let bannerList = await app.$axios.get('/api/getBanner');
