@@ -9,6 +9,9 @@ const session = require('koa-session');
 const index = require('./routes/index')
 const users = require('./routes/users')
 const api = require('./routes/api')
+const books = require('./routes/books')
+const logsUtil = require('./utils/logs.js');
+
 
 
 
@@ -78,17 +81,32 @@ app.use(views(__dirname + '/views', {
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    const start = new Date();					          // 响应开始时间
+    let intervals;								          // 响应间隔时间
+    try {
+        await next();
+        intervals = new Date() - start;
+        logsUtil.logResponse(ctx, intervals);	            //记录响应日志
+    } catch (error) {
+        intervals = new Date() - start;
+        logsUtil.logError(ctx, error, intervals);           //记录异常日志
+        ctx.response.status = error.statusCode || error.status || 500;
+        ctx.response.body = {
+            code: 1,
+            message: error.message
+        };
+        ctx.app.emit('error', error, ctx); // 手动释放error事件
+    }
+    const ms = new Date() - start
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
 
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(api.routes(), api.allowedMethods())
-
+app.use(books.routes(), books.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
