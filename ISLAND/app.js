@@ -1,7 +1,7 @@
 const koa = require("koa")
-const InitManger = require('./unit/init.js')
+const InitManger = require('./utils/init.js')
 const parser = require("koa-bodyparser")
-const catchError = require("./middlewares/exceptions")
+const catchError = require("./middlewares/exceptions")  //异常处理
 
 
 const app = new koa()
