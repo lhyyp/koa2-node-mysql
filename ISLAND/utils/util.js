@@ -41,8 +41,8 @@ const generateToken = function(uid, scope){
     const secretKey = config.security.secretKey
     const expiresIn = config.security.expiresIn
     const token = jwt.sign({
-        uid,
-        scope
+        uid,   
+        scope     //
     },secretKey,{
         expiresIn
     })

@@ -1,0 +1,6 @@
+<!--index.wxml-->
+ <button bindtap='getToken'> 获取token </button>
+
+  <button bindtap='verifyToken'> 检验token </button>
+
+    <button bindtap='ongetlatest'> 获取最新期刊</button>

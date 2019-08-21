@@ -9,9 +9,9 @@ function isThisType(val) {
 }
 
 const LoginType = {
-    USER_MINI: 100,
     USER_EMAIL: 101,
     USER_IPHONE: 102,
+    USER_MINI_PROGRAM:103,
     isThisType
 }
 

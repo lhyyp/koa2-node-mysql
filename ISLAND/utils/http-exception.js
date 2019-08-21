@@ -59,6 +59,16 @@ class MissingParameters extends HttpException{
     }
 }
 
+class Forbbiden extends HttpException{
+    constructor(msg, status){
+        super()
+        this.msg = msg || "禁止访问"
+        this.status = status || 401
+        this.code = 403
+
+    }
+}
+
 
 module.exports = { 
     HttpException ,
@@ -66,5 +76,6 @@ module.exports = {
     Success,
     NotFount,
     Authfailed,
-    MissingParameters
+    MissingParameters,
+    Forbbiden
 }

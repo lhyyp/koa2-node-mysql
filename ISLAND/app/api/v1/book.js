@@ -1,25 +1,16 @@
 const Router = require("koa-router")
-const router = new Router()
+const router = new Router({
+    prefix: '/v1/book'
+})
 const PositiveInteferValidator = require("../../validators/validators")
+const Auth = require("../../../middlewares/auth")
 
-router.get('/v1/book',(ctx, next) => {
-    ctx.body = {
-        code : 200,
-        data: 'book1'
+router.get('/', new Auth(9).m, (ctx, next) => {
+    ctx.body = { 
+        uid: ctx.auth.uid ,
+        scope : ctx.auth.scope
     }
-
 })
 
-router.post('/v1/:id/book',(ctx, next) => {
-    const id = ctx.params
-    const v = new PositiveInteferValidator().validate(ctx)
-   
 
-    ctx.body = {
-        code : 200,
-        data: 'book4444'
-    }
-   
-
-})
 module.exports = router

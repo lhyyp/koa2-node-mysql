@@ -8,8 +8,6 @@ const catchError = async (ctx, next) =>{
         if(isDev == 'development' && isHttpException){
             throw error
         }
-        
-        
         if(isHttpException){
             ctx.body = {
                 msg : error.msg,
