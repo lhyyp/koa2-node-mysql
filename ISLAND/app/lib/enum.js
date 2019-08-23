@@ -14,5 +14,11 @@ const LoginType = {
     USER_MINI_PROGRAM:103,
     isThisType
 }
+const classicType = {
+    movie: 1,
+    music: 2,
+    sentence:3,
+    isThisType
+}
 
-module.exports = { LoginType } 
+module.exports = { LoginType,classicType } 

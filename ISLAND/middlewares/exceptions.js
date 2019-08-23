@@ -5,7 +5,7 @@ const catchError = async (ctx, next) =>{
     } catch (error) {
         const isDev = process.env.NODE_ENV
         const isHttpException = error instanceof HttpException
-        if(isDev == 'development' && isHttpException){
+        if((isDev == 'development' || !isDev) && !isHttpException){
             throw error
         }
         if(isHttpException){

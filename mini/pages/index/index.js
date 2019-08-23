@@ -70,6 +70,40 @@ Page({
     })
 
   },
+  onlike(){
+    wx.request({
+      url: 'http://127.0.0.1:3005/v1/classic/like',
+      method:'POST',
+      data:{
+        "art_id":1,
+        "type":1
+      },
+      header: {
+        Authorization: this.encode1()
+      },
+      success: (res) => {
+        console.log(res)
+      }
+    })
+
+  },
+  ondislike(){
+    wx.request({
+      url: 'http://127.0.0.1:3005/v1/classic/dislike',
+      method: 'POST',
+      data: {
+        "art_id": 1,
+        "type": 1
+      },
+      header: {
+        Authorization: this.encode1()
+      },
+      success: (res) => {
+        console.log(res)
+      }
+    })
+
+  },
   encode1(){
     console.log(1)
     const token = wx.getStorageSync("token")

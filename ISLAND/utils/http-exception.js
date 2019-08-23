@@ -34,7 +34,7 @@ class NotFount extends HttpException{
         super()
         this.msg = msg || "资源未找到"
         this.status = status || 401
-        this.code = 404
+        this.code = 200
 
     }
 }
@@ -44,7 +44,7 @@ class Authfailed extends HttpException{
         super()
         this.msg = msg || "授权失败"
         this.status = status || 401
-        this.code = 401
+        this.code = 200
 
     }
 }
@@ -54,7 +54,7 @@ class MissingParameters extends HttpException{
         super()
         this.msg = msg || "缺少参数"
         this.status = status || 401
-        this.code = 401
+        this.code = 200
 
     }
 }
@@ -65,7 +65,16 @@ class Forbbiden extends HttpException{
         this.msg = msg || "禁止访问"
         this.status = status || 401
         this.code = 403
+    }
+}
 
+
+class LikeError extends HttpException{
+    constructor(msg, status){
+        super()
+        this.msg = msg || "您已点赞"
+        this.status = status || 401
+        this.code = 200
     }
 }
 
@@ -77,5 +86,6 @@ module.exports = {
     NotFount,
     Authfailed,
     MissingParameters,
-    Forbbiden
+    Forbbiden,
+    LikeError
 }
