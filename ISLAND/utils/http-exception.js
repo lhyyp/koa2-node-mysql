@@ -10,18 +10,18 @@ class HttpException extends Error{
 
 
 class ParameterException extends HttpException{
-    constructor(msg, status){
+    constructor(msg, status=1001){
         super()
         this.msg = msg
         this.status = status
-
     }
 }
 
 class Success extends HttpException{
-    constructor(msg, status){
+    constructor(data,msg, status){
         super()
         this.msg = msg || "ok"
+        this.data = data
         this.status = status || 200
         this.code = 201
 
@@ -58,6 +58,15 @@ class MissingParameters extends HttpException{
 
     }
 }
+class ErrorParameters extends HttpException{
+    constructor(msg, status){
+        super()
+        this.msg = msg || "参数不合法"
+        this.status = status || 401
+        this.code = 200
+
+    }
+}
 
 class Forbbiden extends HttpException{
     constructor(msg, status){
@@ -86,6 +95,7 @@ module.exports = {
     NotFount,
     Authfailed,
     MissingParameters,
+    ErrorParameters,
     Forbbiden,
     LikeError
 }

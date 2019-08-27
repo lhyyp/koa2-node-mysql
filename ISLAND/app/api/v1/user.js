@@ -3,9 +3,9 @@ const router = new Router({
     prefix: '/v1/user'
 })
 const { User } = require("../../models/user")
-const { RegisterValidator, TokenValidator,VerifyTokenValidator } = require("../../validators/validators")
+const { RegisterValidator, TokenValidator, VerifyTokenValidator } = require("../../validators/validators")
 const { Success, MissingParameters } = require("../../../utils/http-exception")
-const { USER_EMAIL, USER_IPHONE ,USER_MINI_PROGRAM} = require("../../lib/enum").LoginType
+const { USER_EMAIL, USER_IPHONE, USER_MINI_PROGRAM } = require("../../lib/enum").LoginType
 const { generateToken } = require("../../../utils/util")
 const Auth = require("../../../middlewares/auth")
 const WXManger = require("../../services/wx")
@@ -38,15 +38,13 @@ router.post('/login', async (ctx) => {
             throw new MissingParameters("没有处理的函数")
             break
     }
-    ctx.body = {
-        token
-    }
+    ctx.body =  new Success({'token':token})
 })
 
-router.post("/verify",async (ctx) => {
+router.post("/verify", async (ctx) => {
     const v = await new VerifyTokenValidator().validate(ctx)
-    const res = Auth.verifyToken(v.get("body.token")) 
-    ctx.body = res 
+    const res = Auth.verifyToken(v.get("body.token"))
+    ctx.body = res
 
 })
 

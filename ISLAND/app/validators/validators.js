@@ -2,6 +2,7 @@
 const { LinValidator, Rule } = require("../../utils/lin-validator")
 const { User } = require("../models/user")
 const { LoginType ,classicType} = require("../lib/enum")
+const { ErrorParameters } = require("../../utils/http-exception")
 
 
 
@@ -92,18 +93,18 @@ class VerifyTokenValidator extends LinValidator {
 
 function checkLoginType(vals){
     if (!vals.body.type) {
-        throw new Error("type是必须参数")
+        throw new ErrorParameters("type是必须参数")
     }
     if (!LoginType.isThisType(vals.body.type)) {
-        throw new Error("type参数不合法")
+        throw new ErrorParameters("type参数不合法")
     }  
 }
 function checkClassicType(vals){
     if (!vals.body.type) {
-        throw new Error("type是必须参数")
+        throw new ErrorParameters("type是必须参数")
     }
     if (!classicType.isThisType(vals.body.type)) {
-        throw new Error("type参数不合法")
+        throw new ErrorParameters("type参数不合法")
     }  
 }
 

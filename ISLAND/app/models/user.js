@@ -17,7 +17,6 @@ class User extends Model {
         if (!plainPassword) {
             throw new MissingParameters("缺少密码参数")
         }
-        console.log(plainPassword, user.password)
         const correct = bcrypt.compareSync(plainPassword, user.password)
         if (!correct) {
             throw new Authfailed("密码不正确")
