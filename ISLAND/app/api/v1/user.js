@@ -10,6 +10,14 @@ const { generateToken } = require("../../../utils/util")
 const Auth = require("../../../middlewares/auth")
 const WXManger = require("../../services/wx")
 
+/***
+ * 注册
+ * email => 邮箱
+ * password1 => 密码
+ * password2
+ * userName => 昵称
+ */
+
 router.post('/register', async (ctx) => {
     const v = await new RegisterValidator().validate(ctx)
     const user = {
@@ -21,6 +29,12 @@ router.post('/register', async (ctx) => {
     ctx.body =  new Success(user)
 })
 
+/**
+ * 登录
+ * type => 登录方式 101 => 邮箱登录 102 => 电话号码登录（ps:暂时未开发） 103=>小程序登录
+ * account => type:101 => 邮箱 103 => 前端小程序获取的用户code
+ * secret =>  type:101 => 用户密码,  103 =>不需要传
+ */
 router.post('/login', async (ctx) => {
     const v = await new TokenValidator().validate(ctx)
     let token = null
