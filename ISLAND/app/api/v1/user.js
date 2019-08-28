@@ -18,7 +18,7 @@ router.post('/register', async (ctx) => {
         password: v.get("body.password1")
     }
     await User.create(user)
-    throw new Success()
+    ctx.body =  new Success(user)
 })
 
 router.post('/login', async (ctx) => {

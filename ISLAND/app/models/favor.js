@@ -17,7 +17,6 @@ class Favor extends Model {
         if (favor) {
             throw new LikeError()
         }
-
         // 开启事务
         return db.transaction(async t => {
             await Favor.create({
@@ -31,7 +30,7 @@ class Favor extends Model {
     static async dislike(art_id, type, uid) {
         // 1、删除记录
         // 2、classic fav_nums -1
-        const favor = await Favor.destroy({
+        const favor = await Favor.findOne({
             where: {
                 art_id, type, uid
             }

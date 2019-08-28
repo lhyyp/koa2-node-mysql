@@ -11,7 +11,7 @@ const { Success } = require("../../../utils/http-exception")
 
 
 
-router.get('/latest', new Auth().m, async (ctx, next) => {
+router.get('/latest', async (ctx, next) => {
     const flow = await Flow.findOne({
         order: [
             ['index', 'DESC']
@@ -19,7 +19,7 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
     })
     const art = await Art.getData(flow.art_id, flow.type)
     art.setDataValue("index", flow.index)
-    ctx.body = art
+    ctx.body = new Success(art)
 })
 
 
