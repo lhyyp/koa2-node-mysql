@@ -55,6 +55,10 @@ router.post('/login', async (ctx) => {
     ctx.body =  new Success({'token':token})
 })
 
+
+/**
+ * 验证token
+ */
 router.post("/verify", async (ctx) => {
     const v = await new VerifyTokenValidator().validate(ctx)
     const res = Auth.verifyToken(v.get("body.token"))

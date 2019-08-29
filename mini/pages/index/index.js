@@ -34,7 +34,7 @@ Page({
             },
             success: (res)=>{
               console.log(res)
-              const token = res.data.token;
+              const token = res.data.data.token;
               console.log(token)
               wx.setStorageSync('token', token)
             }

@@ -100,10 +100,15 @@ function checkLoginType(vals){
     }  
 }
 function checkClassicType(vals){
-    if (!vals.body.type) {
+    
+    let type = vals.body.type || vals.path.type
+    if (!type) {
         throw new ErrorParameters("type是必须参数")
     }
-    if (!classicType.isThisType(vals.body.type)) {
+    type = parseInt(type)
+   
+    // this.parsed.path.type = type
+    if (!classicType.isThisType(type)) {
         throw new ErrorParameters("type参数不合法")
     }  
 }
