@@ -1,4 +1,4 @@
-
+const Logger = require('../utils/logs')
 const { Sequelize, Model } = require("sequelize")
 const {
     clone,
@@ -24,12 +24,15 @@ const sequelize = new Sequelize(dbName, user, password, {
         timestamps: true,  //为模型添加 createdAt 和 updatedAt 两个时间戳字段
         paranoid: true,    //使用逻辑删除。设置为true后，调用 destroy 方法时将不会删队模型，而是设置一个 deletedAt 列。此设置需要 timestamps=true 
         underscoredAll: false,   //转换模型名的驼峰命名规则为表名的下划线命令规则
-        logging:false
+
+    },
+    logging: function (sql) {    // sql写入日志
+        Logger.logInfo(sql);
     }
+
 })
 sequelize.sync({
-    force: false,
-    logging:false
+    force: false
 })
 
 // 序列化json
