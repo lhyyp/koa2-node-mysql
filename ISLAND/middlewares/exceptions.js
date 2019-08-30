@@ -22,10 +22,7 @@ const catchError = async (ctx, next) =>{
                 requestUrl : `${ctx.method} ${ctx.path}`   
             }
             ctx.status = 5000
-
-        }
-        
-        
+        }       
     }
 }
 module.exports = catchError

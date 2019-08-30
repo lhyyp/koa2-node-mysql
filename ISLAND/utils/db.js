@@ -20,14 +20,19 @@ const sequelize = new Sequelize(dbName, user, password, {
     logging: true,
     timezone: "+08:00",
     define: {
-        timestamps: true,
-        paranoid: true
-
+        //更多查看https://itbilu.com/nodejs/npm/VkYIaRPz-.html#api-instance-method
+        timestamps: true,  //为模型添加 createdAt 和 updatedAt 两个时间戳字段
+        paranoid: true,    //使用逻辑删除。设置为true后，调用 destroy 方法时将不会删队模型，而是设置一个 deletedAt 列。此设置需要 timestamps=true 
+        underscoredAll: false,   //转换模型名的驼峰命名规则为表名的下划线命令规则
+        logging:false
     }
 })
 sequelize.sync({
-    force: false
+    force: false,
+    logging:false
 })
+
+// 序列化json
 Model.prototype.toJSON = function () {
     let data = clone(this.dataValues)
     if (isArray(this.exclude)) {

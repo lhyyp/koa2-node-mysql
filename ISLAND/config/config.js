@@ -1,4 +1,5 @@
 module.exports = {
+    port:3005,
     database:{
         dbName:'island',
         host:"localhost",
@@ -7,7 +8,7 @@ module.exports = {
         password:'root',
     },
     security:{
-        secretKey:"1111",
+        secretKey:"1111",    //生产token key
         expiresIn:60*60*24
     },
     wx:{

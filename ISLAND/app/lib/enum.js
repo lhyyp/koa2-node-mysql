@@ -1,5 +1,4 @@
 function isThisType(val) {
-    console.log(val,111133)
     for (let key in this) {
         if (this[key] === val) {
             return true
