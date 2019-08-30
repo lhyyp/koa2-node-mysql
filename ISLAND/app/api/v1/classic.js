@@ -57,7 +57,7 @@ router.post('/dislike', new Auth().m, async (ctx, next) => {
 })
 
 /**
- *获取某一咨询详情
+ *获取咨询详情
  * art_id => 资讯id
  * type => 资讯分类
  *  */
@@ -66,6 +66,7 @@ router.get('/favor/:type/:id', async (ctx, next) => {
     const id = v.get('path.id')
     const type = parseInt(v.get('path.type'))
     let art = await Art.getData(id, type)
+    art.exclude = ['createdAt','updatedAt','deletedAt']
     if (!art) {
         throw new NotFount()
     }
@@ -84,9 +85,11 @@ router.get('/favor/:type/:id', async (ctx, next) => {
 
 
 /**
+ * 获取用户收藏得期刊
  *  */
 router.get('/mylike', new Auth().m, async (ctx, next) => {
-
+    const data = await Favor.getMyClassicFavors(ctx.auth.uid)
+    ctx.body = new Success(data)
 })
 
 

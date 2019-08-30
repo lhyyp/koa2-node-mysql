@@ -1,7 +1,7 @@
 
 const { LinValidator, Rule } = require("../../utils/lin-validator")
 const { User } = require("../models/user")
-const { LoginType ,classicType} = require("../lib/enum")
+const { LoginType, classicType } = require("../lib/enum")
 const { ErrorParameters } = require("../../utils/http-exception")
 
 
@@ -32,10 +32,11 @@ class TokenValidator extends LinValidator {
                 max: 128
             })
         ]
-        this.validateLoginType= checkLoginType
+        const checker = new Checker(LoginType)
+        this.validateLoginType = checker.check.bind(checker)
 
     }
-    
+
 }
 
 class RegisterValidator extends LinValidator {
@@ -90,34 +91,80 @@ class VerifyTokenValidator extends LinValidator {
         ]
     }
 }
+/**
+ * 
+ * @param {* 检验登录方式} vals 
+ */
 
-function checkLoginType(vals){
+function checkLoginType(vals) {
     if (!vals.body.type) {
         throw new ErrorParameters("type是必须参数")
     }
     if (!LoginType.isThisType(vals.body.type)) {
         throw new ErrorParameters("type参数不合法")
-    }  
+    }
 }
-function checkClassicType(vals){
-    
+
+/**
+ * 
+ * @param {检验分类type} vals ctx 上下文 
+ */
+function checkClassicType(vals) {
     let type = vals.body.type || vals.path.type
     if (!type) {
         throw new ErrorParameters("type是必须参数")
     }
     type = parseInt(type)
-   
+
     // this.parsed.path.type = type
     if (!classicType.isThisType(type)) {
         throw new ErrorParameters("type参数不合法")
-    }  
+    }
+}
+
+/**
+ *封装checkType 方法
+ */
+class Checker {
+    constructor(type) {
+        this.enumType = type
+    }
+    check(vals) {
+        let type = vals.body.type || vals.path.type
+        if (!type) {
+            throw new ErrorParameters("type是必须参数")
+        }
+        type = parseInt(type)
+        if (!this.enumType.isThisType(type)) {
+            throw new ErrorParameters("type参数不合法")
+        }
+    }
 }
 
 class LikeValidator extends PositiveInteferValidator {
     constructor() {
         super()
-        this.validateType = checkClassicType
-        
+        const checker = new Checker(classicType)
+        this.validateType = checker.check.bind(checker)
+
+    }
+}
+
+class SearchValidator extends LinValidator {
+    constructor() {
+        super()
+        this.q =[
+            new Rule('isLength','关键字不能为空',{min:1,max:16})
+        ]
+        this.start =[
+            new Rule('isInt','start不合规范',{min:0,max:60000}),
+            new Rule("isOptional",'',0)
+        ]
+        this.count =[
+            new Rule('isInt','conut不合规范',{min:1,max:20}),
+            new Rule("isOptional",'',20)
+        ]
+
     }
 }
 
@@ -130,5 +177,6 @@ module.exports = {
     RegisterValidator,
     TokenValidator,
     VerifyTokenValidator,
-    LikeValidator
+    LikeValidator,
+    SearchValidator
 } 

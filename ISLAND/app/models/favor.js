@@ -1,8 +1,8 @@
 
 const { db } = require("../../utils/db")
-const { Sequelize, Model } = require("sequelize")
+const { Sequelize, Model ,Op} = require("sequelize")
 const { LikeError } = require("../../utils/http-exception")
-const { Art } = require("./art")
+const { Art,NotFount } = require("./art")
 
 class Favor extends Model {
 
@@ -48,6 +48,24 @@ class Favor extends Model {
                 transaction: t
             })
         })
+    }
+    /**
+     * 
+     * @param {* 获取收藏列表} uid 
+     */
+    static async getMyClassicFavors(uid){
+        const arts = await Favor.findAll({
+            where:{
+                uid,
+                type:{
+                    [Op.not]:4
+                }
+            }
+        })
+        if(!arts){
+            throw new NotFount()
+        }
+        return await Art.getList(arts)
     }
 }
 
